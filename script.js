@@ -234,6 +234,10 @@ function startAnimation() {
 
   // Add glow pulse to scroll after everything settles
   setTimeout(function() {
+    // Lock in the unfurl end state before swapping animation
+    scrollEl.style.clipPath = 'inset(0 0 0% 0)';
+    scrollEl.style.opacity = '1';
+    scrollEl.classList.remove('animate-unfurl');
     scrollEl.style.animation = 'pulseGlow 3s ease-in-out infinite';
   }, 6500);
 }
