@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Happy Chinese New Year 2026 — Year of the Snake</title>
+  <meta name="description" content="Celebrate Chinese New Year 2026 with an animated pixel art lion dance! Y2K retro style.">
+  <meta property="og:title" content="Happy CNY 2026 — Year of the Snake">
+  <meta property="og:description" content="Animated pixel art lion dance for Chinese New Year 2026">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Scanline overlay -->
+  <div class="scanlines" aria-hidden="true"></div>
+
+  <!-- Sparkle/star background (populated by JS) -->
+  <div id="sparkle-field" aria-hidden="true"></div>
+
+  <!-- Main stage -->
+  <main class="stage">
+    <!-- Title -->
+    <header class="title-area">
+      <h1 class="pixel-title">CNY 2026</h1>
+      <p class="pixel-subtitle">Year of the Snake</p>
+    </header>
+
+    <!-- Lion dance area -->
+    <div class="lion-dance-area">
+      <!-- Left lion (red/gold) -->
+      <div class="lion lion-left" aria-label="Red lion dancing from left">
+        <div class="lion-pixel lion-red"></div>
+      </div>
+
+      <!-- Scroll (drops between lions) -->
+      <div class="cny-scroll" aria-label="New Year greeting scroll">
+        <div class="scroll-top-roller"></div>
+        <div class="scroll-body">
+          <div class="greeting-text">
+            <p class="greeting-cn">恭喜发财</p>
+            <p class="greeting-en">Happy New Year</p>
+            <p class="greeting-year">2026</p>
+            <p class="greeting-sub">Wishing you prosperity<br>in the Year of the Snake</p>
+            <div class="snake-pixel" aria-hidden="true"></div>
+          </div>
+        </div>
+        <div class="scroll-bottom-roller"></div>
+      </div>
+
+      <!-- Right lion (green/silver) -->
+      <div class="lion lion-right" aria-label="Green lion dancing from right">
+        <div class="lion-pixel lion-green"></div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer-area">
+      <p class="footer-text">Click anywhere for extra luck!</p>
+    </footer>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
