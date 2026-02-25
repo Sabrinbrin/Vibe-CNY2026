@@ -1,6 +1,6 @@
 // ===== Pixel Art Data =====
 // Each number maps to a color in the palette. 0 = transparent.
-// Lions are ~18 columns x 22 rows
+// Lions are ~28 columns x 20 rows (side-profile with body + dancer legs)
 
 const redLionPalette = {
   1: '#1a0a00',   // outline dark
@@ -15,6 +15,9 @@ const redLionPalette = {
   10: '#330000',  // mouth interior
   11: '#ff4466',  // ear tuft
   12: '#ffcc00',  // light gold accent
+  13: '#ff6666',  // fabric body (lighter red)
+  14: '#1a1a3a',  // dancer pants (dark navy)
+  15: '#222222',  // shoes
 };
 
 const greenLionPalette = {
@@ -30,34 +33,35 @@ const greenLionPalette = {
   10: '#003300',  // mouth interior
   11: '#44ff66',  // ear tuft
   12: '#e0e0e0',  // light silver accent
+  13: '#66ff99',  // fabric body (lighter green)
+  14: '#1a1a3a',  // dancer pants (dark navy)
+  15: '#222222',  // shoes
 };
 
-// Red lion pixel grid (18 wide x 22 tall)
-// Frontal view of a Southern-style lion dance head
+// Side-profile lion dance pixel grid (28 wide x 20 tall)
+// Southern-style lion dance: head + body costume + dancer legs, facing RIGHT
 const lionGrid = [
-  //  0  1  2  3  4  5  6  7  8  9  10 11 12 13 14 15 16 17
-  [0, 0, 0, 0, 0, 0, 0, 4, 4, 4, 4, 0, 0, 0, 0, 0, 0, 0],   // row 0:  horn tip
-  [0, 0, 0, 0, 0, 0, 4, 5, 12,12, 5, 4, 0, 0, 0, 0, 0, 0],   // row 1:  horn
-  [0, 0, 0, 0, 0, 4, 5, 12, 4, 4,12, 5, 4, 0, 0, 0, 0, 0],   // row 2:  horn base
-  [0, 0, 0, 0, 1, 4, 4, 4, 4, 4, 4, 4, 4, 1, 0, 0, 0, 0],   // row 3:  forehead top
-  [0, 0, 0, 1, 2, 2, 4, 12, 5, 5,12, 4, 2, 2, 1, 0, 0, 0],   // row 4:  forehead
-  [0, 0, 1, 2, 3, 2, 2, 4, 4, 4, 4, 2, 2, 3, 2, 1, 0, 0],   // row 5:  forehead lower
-  [0, 11, 1, 2, 2, 1, 1, 2, 2, 2, 2, 1, 1, 2, 2, 1,11, 0],   // row 6:  brow ridge + ear tufts
-  [0, 11, 1, 2, 1, 6, 6, 6, 1, 1, 6, 6, 6, 1, 2, 1,11, 0],   // row 7:  eyes top
-  [0, 0, 1, 2, 1, 6, 7, 8, 1, 1, 6, 7, 8, 1, 2, 1, 0, 0],   // row 8:  eyes mid (pupil+sparkle)
-  [0, 0, 1, 2, 1, 6, 6, 6, 1, 1, 6, 6, 6, 1, 2, 1, 0, 0],   // row 9:  eyes bottom
-  [0, 0, 1, 3, 2, 1, 1, 1, 9, 9, 1, 1, 1, 2, 3, 1, 0, 0],   // row 10: nose bridge
-  [0, 2, 1, 3, 2, 2, 9, 9, 9, 9, 9, 9, 2, 2, 3, 1, 2, 0],   // row 11: nose + cheek fur
-  [2, 3, 1, 3, 2, 2, 1, 9, 9, 9, 9, 1, 2, 2, 3, 1, 3, 2],   // row 12: wide cheeks
-  [0, 2, 1, 1, 4, 4, 1,10,10,10,10, 1, 4, 4, 1, 1, 2, 0],   // row 13: mouth top (gold trim)
-  [0, 0, 1, 4, 1, 6, 6,10,10,10,10, 6, 6, 1, 4, 1, 0, 0],   // row 14: teeth + mouth
-  [0, 0, 1, 4, 1, 6,10,10,10,10,10,10, 6, 1, 4, 1, 0, 0],   // row 15: mouth interior
-  [0, 0, 1, 4, 1, 1,10,10,10,10,10,10, 1, 1, 4, 1, 0, 0],   // row 16: lower mouth
-  [0, 0, 0, 1, 4, 4, 1, 1, 1, 1, 1, 1, 4, 4, 1, 0, 0, 0],   // row 17: jaw (gold)
-  [0, 0, 0, 0, 1, 2, 3, 2, 2, 2, 2, 3, 2, 1, 0, 0, 0, 0],   // row 18: chin fur
-  [0, 0, 0, 0, 0, 1, 2, 3, 3, 3, 3, 2, 1, 0, 0, 0, 0, 0],   // row 19: beard
-  [0, 0, 0, 0, 0, 0, 1, 2, 2, 2, 2, 1, 0, 0, 0, 0, 0, 0],   // row 20: beard tassel
-  [0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0],   // row 21: beard tip
+  // 0  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27
+  [0, 0, 0, 0, 0, 4, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],  // row 0:  horn tip
+  [0, 0, 0, 0, 4, 5,12, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],  // row 1:  horn
+  [0, 0, 0, 4, 5, 4, 4, 5, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],  // row 2:  horn base
+  [0, 0, 1, 4, 4, 4, 4, 4, 4, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],  // row 3:  forehead top
+  [0, 1, 2, 2, 4,12, 5, 4, 2, 2, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],  // row 4:  forehead
+  [0, 1, 2, 3, 2, 2, 4, 2, 3, 2,11, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],  // row 5:  brow + ear tuft
+  [1, 2, 6, 6, 6, 1, 2, 2, 2, 2, 2, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],  // row 6:  eye row
+  [1, 2, 6, 7, 8, 1, 9, 9, 2, 3, 2, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],  // row 7:  eye pupil + nose
+  [1, 3, 6, 6, 6, 1, 9, 2, 3, 2, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],  // row 8:  eye bottom + cheek
+  [1, 4, 4, 1, 1,10,10,10, 1, 4, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],  // row 9:  mouth top (gold trim)
+  [1, 6, 6,10,10,10,10, 6, 1, 4, 1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],  // row 10: teeth + mouth open
+  [0, 1, 1,10,10,10,10, 1, 4, 4, 1, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],  // row 11: lower jaw
+  [0, 0, 1, 1, 4, 4, 1, 1, 2, 3, 2, 1,13,13, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],  // row 12: chin + fur ruff
+  [0, 0, 0, 2, 3, 2, 2, 3, 1,13,13,13,13,13,13, 4,13,13, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],  // row 13: mane → body fabric
+  [0, 0, 0, 0, 1, 2, 2, 1,13,13, 4,13,13,13,13,13,13,13,13, 0, 0, 0, 0, 0, 0, 0, 0, 0],  // row 14: mane → body
+  [0, 0, 0, 0, 0, 1, 1,13,13,13,13, 4,13,13,13,13,13,13,13,13, 2, 2, 0, 0, 0, 0, 0, 0],  // row 15: body with gold trim + tail fringe
+  [0, 0, 0, 0, 0, 0, 1, 1,13,13,13,13,13, 4,13,13,13,13,13, 1, 2, 3, 2, 0, 0, 0, 0, 0],  // row 16: body lower + tail
+  [0, 0, 0, 0, 0, 0, 0, 0, 1,14,14, 1, 1, 1,14,14, 1, 1, 1, 0, 0, 2, 2, 0, 0, 0, 0, 0],  // row 17: dancer pants
+  [0, 0, 0, 0, 0, 0, 0, 0, 1,14, 1, 0, 0, 1,14, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],  // row 18: dancer legs
+  [0, 0, 0, 0, 0, 0, 0, 0,15,15, 0, 0, 0,15,15, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],  // row 19: shoes
 ];
 
 // Small snake pixel art for the scroll (12 wide x 6 tall)
@@ -231,18 +235,18 @@ function startAnimation() {
 
   if (!leftLion || !rightLion || !scrollEl || !greetingText) return;
 
-  // Step 1 & 2: Lions enter and walk to center (after 0.5s delay)
+  // Step 1: Lions enter and walk to scroll edges (after 0.5s delay)
   setTimeout(function() {
     leftLion.classList.add('animate-enter');
     rightLion.classList.add('animate-enter');
   }, 500);
 
-  // Step 3: Scale up when they reach center (after entrance finishes at ~2.5s)
+  // Step 2: Lions arrive at scroll edges, switch to idle bobbing + burst effect
   setTimeout(function() {
     leftLion.classList.remove('animate-enter');
     rightLion.classList.remove('animate-enter');
-    leftLion.classList.add('animate-grow');
-    rightLion.classList.add('animate-grow');
+    leftLion.classList.add('animate-idle');
+    rightLion.classList.add('animate-idle');
 
     // Sparkle burst at center of stage
     var stage = document.querySelector('.lion-dance-area');
@@ -252,21 +256,15 @@ function startAnimation() {
     }
   }, 2700);
 
-  // Step 4: Scroll unfurls (after grow finishes at ~3.7s)
+  // Step 3: Scroll unfurls between the lions
   setTimeout(function() {
-    // Switch to idle animation
-    leftLion.classList.remove('animate-grow');
-    rightLion.classList.remove('animate-grow');
-    leftLion.classList.add('animate-idle');
-    rightLion.classList.add('animate-idle');
-
     scrollEl.classList.add('animate-unfurl');
-  }, 4000);
+  }, 3000);
 
-  // Step 5: Greeting text fades in
+  // Step 4: Greeting text fades in
   setTimeout(function() {
     greetingText.classList.add('animate-fadein');
-  }, 5200);
+  }, 4200);
 
   // Add glow pulse to scroll after everything settles
   setTimeout(function() {
@@ -275,7 +273,7 @@ function startAnimation() {
     scrollEl.style.opacity = '1';
     scrollEl.classList.remove('animate-unfurl');
     scrollEl.style.animation = 'pulseGlow 3s ease-in-out infinite';
-  }, 6500);
+  }, 5500);
 }
 
 
