@@ -368,23 +368,23 @@ html, body {
 @keyframes slideFromLeft {
   0%   { opacity: 0; transform: translateX(-50%) translateX(-55vw) scale(1); }
   10%  { opacity: 1; }
-  100% { opacity: 1; transform: translateX(-50%) translateX(-160px) scale(1.8); }
+  100% { opacity: 1; transform: translateX(-50%) translateX(-200px) scale(2.0); }
 }
 
 @keyframes slideFromRight {
   0%   { opacity: 0; transform: translateX(-50%) translateX(55vw) scaleX(-1) scale(1); }
   10%  { opacity: 1; }
-  100% { opacity: 1; transform: translateX(-50%) translateX(160px) scaleX(-1) scale(1.8); }
+  100% { opacity: 1; transform: translateX(-50%) translateX(200px) scaleX(-1) scale(2.0); }
 }
 
 @keyframes idleBobLeft {
-  0%, 100% { transform: translateX(-50%) translateX(-160px) scale(1.8) translateY(0); opacity: 1; }
-  50%      { transform: translateX(-50%) translateX(-160px) scale(1.8) translateY(-6px); opacity: 1; }
+  0%, 100% { transform: translateX(-50%) translateX(-200px) scale(2.0) translateY(0); opacity: 1; }
+  50%      { transform: translateX(-50%) translateX(-200px) scale(2.0) translateY(-6px); opacity: 1; }
 }
 
 @keyframes idleBobRight {
-  0%, 100% { transform: translateX(-50%) translateX(160px) scaleX(-1) scale(1.8) translateY(0); opacity: 1; }
-  50%      { transform: translateX(-50%) translateX(160px) scaleX(-1) scale(1.8) translateY(-6px); opacity: 1; }
+  0%, 100% { transform: translateX(-50%) translateX(200px) scaleX(-1) scale(2.0) translateY(0); opacity: 1; }
+  50%      { transform: translateX(-50%) translateX(200px) scaleX(-1) scale(2.0) translateY(-6px); opacity: 1; }
 }
 
 @keyframes unfurlScroll {

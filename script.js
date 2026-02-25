@@ -1,67 +1,38 @@
 // ===== Pixel Art Data =====
 // Each number maps to a color in the palette. 0 = transparent.
-// Lions are ~28 columns x 20 rows (side-profile with body + dancer legs)
 
-const redLionPalette = {
-  1: '#1a0800',   // outline dark (warm)
+// Mandarin orange palette (shared by both left and right oranges)
+const orangePalette = {
+  1: '#6b3300',   // outline dark brown
   2: '#ff8c00',   // bright mandarin orange
-  3: '#cc6600',   // dark orange
-  4: '#ffd700',   // gold
-  5: '#ffaa00',   // dark gold
-  6: '#ffffff',   // white (eyes, teeth)
-  7: '#111111',   // black (pupil)
-  8: '#00ffff',   // cyan sparkle (Y2K)
-  9: '#ffaa66',   // light orange nose
-  10: '#331500',  // mouth interior (warm dark)
-  11: '#ffbb44',  // ear tuft (warm orange-gold)
-  12: '#ffcc00',  // light gold accent
-  13: '#ffaa44',  // fabric body (light orange)
-  14: '#1a1a3a',  // dancer pants (dark navy)
-  15: '#222222',  // shoes
+  3: '#cc6600',   // dark orange (shadow)
+  4: '#ffbb55',   // light orange (highlight)
+  5: '#33aa44',   // green leaf
+  6: '#1a7733',   // dark green leaf
+  7: '#8b5a2b',   // brown stem
+  8: '#ffffff',   // white sparkle
 };
 
-const greenLionPalette = {
-  1: '#0a1a00',   // outline dark
-  2: '#00cc44',   // bright green mane
-  3: '#009933',   // dark green mane
-  4: '#c0c0c0',   // silver
-  5: '#909090',   // dark silver
-  6: '#ffffff',   // white
-  7: '#111111',   // black
-  8: '#ff00ff',   // magenta sparkle (Y2K)
-  9: '#66ff88',   // light green nose
-  10: '#003300',  // mouth interior
-  11: '#44ff66',  // ear tuft
-  12: '#e0e0e0',  // light silver accent
-  13: '#66ff99',  // fabric body (lighter green)
-  14: '#1a1a3a',  // dancer pants (dark navy)
-  15: '#222222',  // shoes
-};
-
-// Side-profile lion dance pixel grid (28 wide x 20 tall)
-// Southern-style lion dance: head + body costume + dancer legs, facing RIGHT
-const lionGrid = [
-  // 0  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27
-  [0, 0, 0, 0, 0, 4, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],  // row 0:  horn tip
-  [0, 0, 0, 0, 4, 5,12, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],  // row 1:  horn
-  [0, 0, 0, 4, 5, 4, 4, 5, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],  // row 2:  horn base
-  [0, 0, 1, 4, 4, 4, 4, 4, 4, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],  // row 3:  forehead top
-  [0, 1, 2, 2, 4,12, 5, 4, 2, 2, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],  // row 4:  forehead
-  [0, 1, 2, 3, 2, 2, 4, 2, 3, 2,11, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],  // row 5:  brow + ear tuft
-  [1, 2, 6, 6, 6, 1, 2, 2, 2, 2, 2, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],  // row 6:  eye row
-  [1, 2, 6, 7, 8, 1, 9, 9, 2, 3, 2, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],  // row 7:  eye pupil + nose
-  [1, 3, 6, 6, 6, 1, 9, 2, 3, 2, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],  // row 8:  eye bottom + cheek
-  [1, 4, 4, 1, 1,10,10,10, 1, 4, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],  // row 9:  mouth top (gold trim)
-  [1, 6, 6,10,10,10,10, 6, 1, 4, 1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],  // row 10: teeth + mouth open
-  [0, 1, 1,10,10,10,10, 1, 4, 4, 1, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],  // row 11: lower jaw
-  [0, 0, 1, 1, 4, 4, 1, 1, 2, 3, 2, 1,13,13, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],  // row 12: chin + fur ruff
-  [0, 0, 0, 2, 3, 2, 2, 3, 1,13,13,13,13,13,13, 4,13,13, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],  // row 13: mane → body fabric
-  [0, 0, 0, 0, 1, 2, 2, 1,13,13, 4,13,13,13,13,13,13,13,13, 0, 0, 0, 0, 0, 0, 0, 0, 0],  // row 14: mane → body
-  [0, 0, 0, 0, 0, 1, 1,13,13,13,13, 4,13,13,13,13,13,13,13,13, 2, 2, 0, 0, 0, 0, 0, 0],  // row 15: body with gold trim + tail fringe
-  [0, 0, 0, 0, 0, 0, 1, 1,13,13,13,13,13, 4,13,13,13,13,13, 1, 2, 3, 2, 0, 0, 0, 0, 0],  // row 16: body lower + tail
-  [0, 0, 0, 0, 0, 0, 0, 0, 1,14,14, 1, 1, 1,14,14, 1, 1, 1, 0, 0, 2, 2, 0, 0, 0, 0, 0],  // row 17: dancer pants
-  [0, 0, 0, 0, 0, 0, 0, 0, 1,14, 1, 0, 0, 1,14, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],  // row 18: dancer legs
-  [0, 0, 0, 0, 0, 0, 0, 0,15,15, 0, 0, 0,15,15, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],  // row 19: shoes
+// Mandarin orange pixel grid (14 wide x 16 tall)
+// Round fruit with leaf + stem on top; highlight top-left, shadow bottom-right
+const orangeGrid = [
+  //0  1  2  3  4  5  6  7  8  9 10 11 12 13
+  [0, 0, 0, 0, 0, 0, 0, 0, 5, 5, 0, 0, 0, 0],  // row 0:  leaf tip
+  [0, 0, 0, 0, 0, 0, 6, 5, 5, 5, 0, 0, 0, 0],  // row 1:  leaf body
+  [0, 0, 0, 0, 0, 0, 7, 7, 0, 0, 0, 0, 0, 0],  // row 2:  stem
+  [0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0],  // row 3:  top outline
+  [0, 0, 0, 1, 4, 4, 2, 2, 2, 2, 1, 0, 0, 0],  // row 4:  upper, highlight left
+  [0, 0, 1, 4, 8, 4, 2, 2, 2, 2, 2, 1, 0, 0],  // row 5:  shine spot
+  [0, 1, 4, 4, 4, 2, 2, 2, 2, 2, 2, 2, 1, 0],  // row 6:  upper body
+  [0, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 0],  // row 7:  widest
+  [0, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 0],  // row 8:  widest
+  [0, 1, 2, 2, 2, 2, 2, 2, 2, 2, 3, 2, 1, 0],  // row 9:  shadow starts
+  [0, 1, 2, 2, 2, 2, 2, 2, 2, 3, 3, 2, 1, 0],  // row 10: shadow
+  [0, 0, 1, 2, 2, 2, 2, 2, 3, 3, 2, 1, 0, 0],  // row 11: narrowing + shadow
+  [0, 0, 1, 2, 2, 2, 2, 2, 2, 2, 2, 1, 0, 0],  // row 12: narrowing
+  [0, 0, 0, 1, 2, 2, 2, 2, 2, 2, 1, 0, 0, 0],  // row 13: bottom
+  [0, 0, 0, 0, 1, 1, 3, 3, 1, 1, 0, 0, 0, 0],  // row 14: bottom crease
+  [0, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 0],  // row 15: navel
 ];
 
 // Small horse pixel art for the scroll (8 wide x 6 tall)
@@ -140,23 +111,11 @@ function createHorseElement(paletteIndex) {
 function applyPixelArt() {
   const pixelSize = 4;
 
-  // Red lion
-  const redLionEl = document.querySelector('.lion-red');
-  if (redLionEl) {
-    redLionEl.style.setProperty('--pixel-art', generatePixelArt(lionGrid, redLionPalette, pixelSize));
-    redLionEl.style.cssText += `; width: ${pixelSize}px; height: ${pixelSize}px;`;
-    const style = document.createElement('style');
-    style.textContent = `.lion-red::after { box-shadow: ${generatePixelArt(lionGrid, redLionPalette, pixelSize)}; }`;
-    document.head.appendChild(style);
-  }
-
-  // Green lion
-  const greenLionEl = document.querySelector('.lion-green');
-  if (greenLionEl) {
-    const style = document.createElement('style');
-    style.textContent = `.lion-green::after { box-shadow: ${generatePixelArt(lionGrid, greenLionPalette, pixelSize)}; }`;
-    document.head.appendChild(style);
-  }
+  // Mandarin oranges (both use the same art)
+  const orangeArt = generatePixelArt(orangeGrid, orangePalette, pixelSize);
+  const orangeStyle = document.createElement('style');
+  orangeStyle.textContent = `.lion-red::after, .lion-green::after { box-shadow: ${orangeArt}; }`;
+  document.head.appendChild(orangeStyle);
 
   // Horse in scroll
   const horseEl = document.querySelector('.horse-pixel');
