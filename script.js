@@ -3,19 +3,19 @@
 // Lions are ~28 columns x 20 rows (side-profile with body + dancer legs)
 
 const redLionPalette = {
-  1: '#1a0a00',   // outline dark
-  2: '#ff2244',   // bright red mane
-  3: '#cc1133',   // dark red mane
+  1: '#1a0800',   // outline dark (warm)
+  2: '#ff8c00',   // bright mandarin orange
+  3: '#cc6600',   // dark orange
   4: '#ffd700',   // gold
   5: '#ffaa00',   // dark gold
   6: '#ffffff',   // white (eyes, teeth)
   7: '#111111',   // black (pupil)
   8: '#00ffff',   // cyan sparkle (Y2K)
-  9: '#ff6688',   // pink nose
-  10: '#330000',  // mouth interior
-  11: '#ff4466',  // ear tuft
+  9: '#ffaa66',   // light orange nose
+  10: '#331500',  // mouth interior (warm dark)
+  11: '#ffbb44',  // ear tuft (warm orange-gold)
   12: '#ffcc00',  // light gold accent
-  13: '#ff6666',  // fabric body (lighter red)
+  13: '#ffaa44',  // fabric body (light orange)
   14: '#1a1a3a',  // dancer pants (dark navy)
   15: '#222222',  // shoes
 };
@@ -64,19 +64,19 @@ const lionGrid = [
   [0, 0, 0, 0, 0, 0, 0, 0,15,15, 0, 0, 0,15,15, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],  // row 19: shoes
 ];
 
-// Small snake pixel art for the scroll (12 wide x 6 tall)
-const snakeGrid = [
-  [0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 0, 0],
-  [0, 0, 0, 0, 0, 0, 0, 2, 4, 0, 2, 0],
-  [0, 2, 2, 2, 0, 0, 2, 4, 0, 0, 0, 0],
-  [2, 4, 0, 4, 2, 2, 4, 0, 0, 0, 0, 0],
-  [0, 2, 0, 0, 2, 4, 0, 0, 0, 0, 0, 0],
-  [0, 0, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0],
+// Small horse pixel art for the scroll (8 wide x 6 tall)
+const scrollHorseGrid = [
+  [0, 1, 0, 0, 0, 0, 2, 0],
+  [1, 1, 1, 1, 1, 1, 2, 0],
+  [0, 0, 1, 1, 1, 1, 0, 0],
+  [0, 0, 1, 1, 1, 1, 0, 0],
+  [0, 0, 1, 0, 0, 1, 0, 0],
+  [0, 0, 1, 0, 0, 1, 0, 0],
 ];
 
-const snakePalette = {
-  2: '#00cc44',
-  4: '#ffd700',
+const scrollHorsePalette = {
+  1: '#ffd700',
+  2: '#ff6600',
 };
 
 // Small pixel horse (8 wide x 6 tall, side view facing right)
@@ -91,10 +91,10 @@ const horseGrid = [
 ];
 
 const horsePalettes = [
-  { 1: '#ffd700', 2: '#ff4444' },  // gold + red
-  { 1: '#ff2244', 2: '#ffd700' },  // red + gold
-  { 1: '#00ffff', 2: '#ff00ff' },  // cyan + magenta
-  { 1: '#ffffff', 2: '#ffd700' },  // white + gold
+  { 1: '#ffd700', 2: '#ff6600' },  // gold + orange
+  { 1: '#ff8c00', 2: '#ffd700' },  // orange + gold
+  { 1: '#00ffff', 2: '#ff00ff' },  // cyan + magenta (Y2K)
+  { 1: '#ffffff', 2: '#ff8c00' },  // white + orange
 ];
 
 
@@ -158,11 +158,11 @@ function applyPixelArt() {
     document.head.appendChild(style);
   }
 
-  // Snake in scroll
-  const snakeEl = document.querySelector('.snake-pixel');
-  if (snakeEl) {
+  // Horse in scroll
+  const horseEl = document.querySelector('.horse-pixel');
+  if (horseEl) {
     const style = document.createElement('style');
-    style.textContent = `.snake-pixel::after { box-shadow: ${generatePixelArt(snakeGrid, snakePalette, pixelSize)}; }`;
+    style.textContent = `.horse-pixel::after { box-shadow: ${generatePixelArt(scrollHorseGrid, scrollHorsePalette, pixelSize)}; }`;
     document.head.appendChild(style);
   }
 }
