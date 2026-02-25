@@ -75,6 +75,24 @@ const snakePalette = {
   4: '#ffd700',
 };
 
+// Small pixel horse (8 wide x 6 tall, side view facing right)
+// 1 = body, 2 = mane/tail accent
+const horseGrid = [
+  [0, 1, 0, 0, 0, 0, 2, 0],  // row 0: ear + tail
+  [1, 1, 1, 1, 1, 1, 2, 0],  // row 1: head + neck + back + tail
+  [0, 0, 1, 1, 1, 1, 0, 0],  // row 2: body
+  [0, 0, 1, 1, 1, 1, 0, 0],  // row 3: belly
+  [0, 0, 1, 0, 0, 1, 0, 0],  // row 4: upper legs
+  [0, 0, 1, 0, 0, 1, 0, 0],  // row 5: lower legs
+];
+
+const horsePalettes = [
+  { 1: '#ffd700', 2: '#ff4444' },  // gold + red
+  { 1: '#ff2244', 2: '#ffd700' },  // red + gold
+  { 1: '#00ffff', 2: '#ff00ff' },  // cyan + magenta
+  { 1: '#ffffff', 2: '#ffd700' },  // white + gold
+];
+
 
 // ===== Pixel Art Generator =====
 function generatePixelArt(grid, palette, pixelSize) {
@@ -89,6 +107,28 @@ function generatePixelArt(grid, palette, pixelSize) {
     }
   }
   return shadows.join(', ');
+}
+
+
+// ===== Horse Element Factory =====
+// Injects palette CSS rules once, then creates horse divs reusing them.
+let horseStylesInjected = false;
+function ensureHorseStyles() {
+  if (horseStylesInjected) return;
+  horseStylesInjected = true;
+  const pixelSize = 3;
+  const style = document.createElement('style');
+  horsePalettes.forEach(function(palette, i) {
+    style.textContent += `.horse-palette-${i}::after { box-shadow: ${generatePixelArt(horseGrid, palette, pixelSize)}; }`;
+  });
+  document.head.appendChild(style);
+}
+
+function createHorseElement(paletteIndex) {
+  ensureHorseStyles();
+  const horse = document.createElement('div');
+  horse.className = 'pixel-horse horse-palette-' + paletteIndex;
+  return horse;
 }
 
 
@@ -124,63 +164,59 @@ function applyPixelArt() {
 }
 
 
-// ===== Sparkle Field =====
-function createSparkleField() {
+// ===== Horse Field (background ambient horseys) =====
+function createHorseField() {
   const field = document.getElementById('sparkle-field');
   if (!field) return;
-  const colors = ['#00ffff', '#ff00ff', '#ffd700', '#ffffff', '#ff69b4', '#ff2244'];
   for (let i = 0; i < 80; i++) {
-    const spark = document.createElement('div');
-    spark.className = 'sparkle';
-    spark.style.left = (Math.random() * 100) + 'vw';
-    spark.style.top = (Math.random() * 100) + 'vh';
-    spark.style.animationDelay = (Math.random() * 5) + 's';
-    spark.style.animationDuration = (1 + Math.random() * 3) + 's';
-    spark.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-    field.appendChild(spark);
+    const paletteIndex = Math.floor(Math.random() * horsePalettes.length);
+    const horse = createHorseElement(paletteIndex);
+    horse.style.left = (Math.random() * 100) + 'vw';
+    horse.style.top = (Math.random() * 100) + 'vh';
+    horse.style.setProperty('--delay', (Math.random() * 5) + 's');
+    horse.style.setProperty('--dur', (2 + Math.random() * 3) + 's');
+    field.appendChild(horse);
   }
 }
 
 
-// ===== Click Sparkle Burst =====
-function initClickSparkles() {
-  const colors = ['#ffd700', '#ff00ff', '#00ffff', '#ff2244', '#00ff00', '#ff69b4'];
+// ===== Click Horse Burst =====
+function initClickHorses() {
   document.addEventListener('click', function(e) {
-    for (let i = 0; i < 12; i++) {
-      const particle = document.createElement('div');
-      particle.className = 'click-spark';
-      particle.style.left = e.clientX + 'px';
-      particle.style.top = e.clientY + 'px';
-      particle.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-      const angle = (Math.PI * 2 * i) / 12;
-      const dist = 30 + Math.random() * 50;
-      particle.style.setProperty('--dx', (Math.cos(angle) * dist) + 'px');
-      particle.style.setProperty('--dy', (Math.sin(angle) * dist) + 'px');
-      document.body.appendChild(particle);
-      particle.addEventListener('animationend', function() {
-        particle.remove();
+    for (let i = 0; i < 8; i++) {
+      const paletteIndex = Math.floor(Math.random() * horsePalettes.length);
+      const horse = createHorseElement(paletteIndex);
+      horse.classList.add('horse-gallop');
+      horse.style.left = e.clientX + 'px';
+      horse.style.top = e.clientY + 'px';
+      const angle = (Math.PI * 2 * i) / 8;
+      const dist = 40 + Math.random() * 60;
+      horse.style.setProperty('--dx', (Math.cos(angle) * dist) + 'px');
+      horse.style.setProperty('--dy', (Math.sin(angle) * dist) + 'px');
+      document.body.appendChild(horse);
+      horse.addEventListener('animationend', function() {
+        horse.remove();
       });
     }
   });
 }
 
 
-// ===== Sparkle Burst Effect (for grow moment) =====
-function createSparkBurst(x, y) {
-  const colors = ['#ffd700', '#ff00ff', '#00ffff', '#ffffff', '#ff2244'];
-  for (let i = 0; i < 20; i++) {
-    const particle = document.createElement('div');
-    particle.className = 'click-spark';
-    particle.style.left = x + 'px';
-    particle.style.top = y + 'px';
-    particle.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-    const angle = (Math.PI * 2 * i) / 20;
+// ===== Horse Burst Effect (for grow moment) =====
+function createHorseBurst(x, y) {
+  for (let i = 0; i < 12; i++) {
+    const paletteIndex = Math.floor(Math.random() * horsePalettes.length);
+    const horse = createHorseElement(paletteIndex);
+    horse.classList.add('horse-gallop');
+    horse.style.left = x + 'px';
+    horse.style.top = y + 'px';
+    const angle = (Math.PI * 2 * i) / 12;
     const dist = 50 + Math.random() * 80;
-    particle.style.setProperty('--dx', (Math.cos(angle) * dist) + 'px');
-    particle.style.setProperty('--dy', (Math.sin(angle) * dist) + 'px');
-    document.body.appendChild(particle);
-    particle.addEventListener('animationend', function() {
-      particle.remove();
+    horse.style.setProperty('--dx', (Math.cos(angle) * dist) + 'px');
+    horse.style.setProperty('--dy', (Math.sin(angle) * dist) + 'px');
+    document.body.appendChild(horse);
+    horse.addEventListener('animationend', function() {
+      horse.remove();
     });
   }
 }
@@ -212,7 +248,7 @@ function startAnimation() {
     var stage = document.querySelector('.lion-dance-area');
     if (stage) {
       var rect = stage.getBoundingClientRect();
-      createSparkBurst(rect.left + rect.width / 2, rect.top + rect.height / 2);
+      createHorseBurst(rect.left + rect.width / 2, rect.top + rect.height / 2);
     }
   }, 2700);
 
@@ -246,7 +282,7 @@ function startAnimation() {
 // ===== Initialize Everything =====
 document.addEventListener('DOMContentLoaded', function() {
   applyPixelArt();
-  createSparkleField();
-  initClickSparkles();
+  createHorseField();
+  initClickHorses();
   startAnimation();
 });
